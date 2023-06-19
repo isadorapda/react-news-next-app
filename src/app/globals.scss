@@ -4,14 +4,15 @@
   margin: 0;
 }
 
-:root{
-    --white: #FFFFFF;
-    --gray-100: #e1e1e6;
-    --gray-300: #a8a8b3;
-    --gray-800: #29292E;
-    --gray-900: #121214;
-    --cyan-500: #61fafb;
-    --yellow-500: #eba417;
+:root {
+  --white: #ffffff;
+  --gray-100: #e1e1e6;
+  --gray-300: #a8a8b3;
+  --gray-700: #1f2729;
+  --gray-800: #29292e;
+  --gray-900: #121214;
+  --cyan-500: #61fafb;
+  --yellow-500: #eba417;
 }
 .header {
   background: green;
@@ -34,17 +35,17 @@ a {
   color: inherit;
   text-decoration: none;
 }
-button{
-    cursor: pointer;
+button {
+  cursor: pointer;
 }
 
-@media (max-width:1080px) {
+@media (max-width: 1080px) {
   html {
-font-size: 93.75%;
+    font-size: 93.75%;
   }
 }
-@media (max-width:720px) {
+@media (max-width: 720px) {
   html {
-font-size: 87.5%;
+    font-size: 87.5%;
   }
 }
