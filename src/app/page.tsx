@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import styles from './page.module.scss'
+import { SubscribeButton } from '@/components/SubscribeButton'
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
           Get access to all publications <br />
           <span>for £5/ month</span>
         </p>
+      <SubscribeButton/>
       </section>
       <Image
         src="/assets/avatar.svg"
