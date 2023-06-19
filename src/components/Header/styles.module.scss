@@ -1,0 +1,45 @@
+.header {
+  width: 100vw;
+  height: 9vh;
+}
+.headerContent {
+  padding: 0 100px;
+  height: 100%;
+  width: 100vw;
+  border-bottom: solid 1px var(--gray-800);
+  display: flex;
+  align-items: center;
+  nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-left: 90px;
+    a {
+      height: 100%;
+      display: inline-block;
+      line-height: 9vh;
+      position: relative;
+      padding: 0 0.5rem;
+      color: var(--gray-300);
+      transition: color 0.2s;
+      &:hover {
+        color: var(--white);
+      }
+      &.active {
+        color: var(--white);
+        font-weight: 600;
+      }
+      &.active::after {
+        content: '';
+        height: 3px;
+        border-radius: 3px 3px 0 0;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: var(--yellow-500);
+      }
+    }
+  }
+}
