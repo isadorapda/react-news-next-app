@@ -3,8 +3,8 @@ import './globals.scss'
 import { Roboto_Flex } from 'next/font/google'
 
 const roboto = Roboto_Flex({
-    display:'swap',
-    subsets:['latin']
+  display: 'swap',
+  subsets: ['latin'],
 })
 
 export const metadata = {
@@ -19,14 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-        
       <body className={roboto.className}>
-        <Header/>
-      {/* <div className='header'>Navbar</div> */}
-        <section>
-        {children}
-        </section>
-        </body>
+        <Header />
+        <section>{children}</section>
+      </body>
     </html>
   )
 }
