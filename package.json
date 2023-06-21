@@ -19,6 +19,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.9.0",
     "sass": "^1.63.4",
+    "stripe": "^12.9.0",
     "typescript": "5.1.3"
   }
 }
