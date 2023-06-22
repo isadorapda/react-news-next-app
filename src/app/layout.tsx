@@ -1,6 +1,7 @@
-import { Header } from '@/components/Header'
-import './globals.scss'
 import { Roboto_Flex } from 'next/font/google'
+import { Header } from '@/components/Header'
+import NextAuthProvider from './providers'
+import './globals.scss'
 
 const roboto = Roboto_Flex({
   display: 'swap',
@@ -20,8 +21,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Header />
-        <section>{children}</section>
+        <NextAuthProvider>
+          <Header />
+          <section>{children}</section>
+        </NextAuthProvider>
       </body>
     </html>
   )
