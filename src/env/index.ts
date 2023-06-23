@@ -6,7 +6,9 @@ export const envSchema = z.object({
 	PORT: z.coerce.number().default(3000),
 	GITHUB_SECRET: z.string(),
 	GITHUB_ID: z.string(),
-	STRIPE_API_KEY: z.string()
+	STRIPE_API_KEY: z.string(),
+    FAUNADB_API_KEY:z.string(),
+
 })
 
 const _env = envSchema.safeParse(process.env)
