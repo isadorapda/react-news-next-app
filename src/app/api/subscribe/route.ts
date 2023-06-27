@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { stripe } from '@/app/services/stripe'
+import { stripe } from '@/lib/stripe'
 import { env } from '@/env'
 import { fauna } from '@/app/services/fauna'
 import { query as q } from 'faunadb'
