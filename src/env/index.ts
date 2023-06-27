@@ -8,6 +8,10 @@ export const envSchema = z.object({
 	GITHUB_ID: z.string(),
 	STRIPE_API_KEY: z.string(),
     FAUNADB_API_KEY:z.string(),
+    STRIPE_SUCCESS_URL:z.string(),
+    STRIPE_CANCEL_URL:z.string(),
+    NEXT_PUBLIC_STRIPE_PUBLIC_KEY:z.string(),
+    NEXTAUTH_SECRET:z.string(),
 
 })
 
