@@ -1,0 +1,66 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"contentglossary",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "o-list-item",
+									"content": {
+										"text": "UI State – State used for controlling interactive parts of our application (e.g. dark mode toggle, modals).",
+										"spans": []
+									},
+									"direction": "ltr"
+								},
+								{
+									"type": "o-list-item",
+									"content": {
+										"text": "Server Cache State – State from the server, which we cache on the client-side for quick access (e.g. call an API, store the result, use it in multiple places).",
+										"spans": []
+									},
+									"direction": "ltr"
+								},
+								{
+									"type": "o-list-item",
+									"content": {
+										"text": "Form State – The many different states of a form (e.g. loading, submitting, disabled, validation, retrying). There's also controlled & uncontrolled form state.",
+										"spans": []
+									},
+									"direction": "ltr"
+								}
+							]
+						}
+					],
+					[
+						"titleglossary",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Glossary",
+										"spans": []
+									},
+									"direction": "ltr"
+								}
+							]
+						}
+					]
+				]
+			},
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]
