@@ -19,6 +19,17 @@ interface PostDocumentData {
    */
   title: prismic.RichTextField
   /**
+   * Content field in *Post*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: post.content
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+   *
+   */
+  content: prismic.RichTextField
+  /**
    * Slice Zone field in *Post*
    *
    * - **Field Type**: Slice Zone
@@ -67,7 +78,7 @@ interface PostDocumentData {
  * Slice for *Post → Slice Zone*
  *
  */
-type PostDocumentDataSlicesSlice = ContentSlice | GlossarySlice
+type PostDocumentDataSlicesSlice = never
 /**
  * Post document from Prismic
  *
@@ -80,115 +91,6 @@ type PostDocumentDataSlicesSlice = ContentSlice | GlossarySlice
 export type PostDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PostDocumentData>, 'post', Lang>
 export type AllDocumentTypes = PostDocument
-/**
- * Item in Content → Items
- *
- */
-export interface ContentSliceDefaultItem {
-  /**
-   * TitleContent field in *Content → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: content.items[].titlecontent
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  titlecontent: prismic.RichTextField
-  /**
-   * Body field in *Content → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: content.items[].body
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  body: prismic.RichTextField
-}
-/**
- * Default variation for Content Slice
- *
- * - **API ID**: `default`
- * - **Description**: `Default`
- * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
- *
- */
-export type ContentSliceDefault = prismic.SharedSliceVariation<
-  'default',
-  Record<string, never>,
-  Simplify<ContentSliceDefaultItem>
->
-/**
- * Slice variation for *Content*
- *
- */
-type ContentSliceVariation = ContentSliceDefault
-/**
- * Content Shared Slice
- *
- * - **API ID**: `content`
- * - **Description**: `Content`
- * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
- *
- */
-export type ContentSlice = prismic.SharedSlice<'content', ContentSliceVariation>
-/**
- * Item in Glossary → Items
- *
- */
-export interface GlossarySliceDefaultItem {
-  /**
-   * TitleGlossary field in *Glossary → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: glossary.items[].titleglossary
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  titleglossary: prismic.RichTextField
-  /**
-   * ContentGlossary field in *Glossary → Items*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: glossary.items[].contentglossary
-   * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-   *
-   */
-  contentglossary: prismic.RichTextField
-}
-/**
- * Default variation for Glossary Slice
- *
- * - **API ID**: `default`
- * - **Description**: `Default`
- * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
- *
- */
-export type GlossarySliceDefault = prismic.SharedSliceVariation<
-  'default',
-  Record<string, never>,
-  Simplify<GlossarySliceDefaultItem>
->
-/**
- * Slice variation for *Glossary*
- *
- */
-type GlossarySliceVariation = GlossarySliceDefault
-/**
- * Glossary Shared Slice
- *
- * - **API ID**: `glossary`
- * - **Description**: `Glossary`
- * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
- *
- */
-export type GlossarySlice = prismic.SharedSlice<
-  'glossary',
-  GlossarySliceVariation
->
 declare module '@prismicio/client' {
   interface CreateClient {
     (
@@ -202,14 +104,6 @@ declare module '@prismicio/client' {
       PostDocumentDataSlicesSlice,
       PostDocument,
       AllDocumentTypes,
-      ContentSliceDefaultItem,
-      ContentSliceDefault,
-      ContentSliceVariation,
-      ContentSlice,
-      GlossarySliceDefaultItem,
-      GlossarySliceDefault,
-      GlossarySliceVariation,
-      GlossarySlice,
     }
   }
 }

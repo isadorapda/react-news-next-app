@@ -16,15 +16,19 @@
           "single": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
+      "content": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Content",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "single": "heading3,heading4,heading5,heading6,image,o-list-item,rtl,paragraph"
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "content": { "type": "SharedSlice" },
-            "glossary": { "type": "SharedSlice" }
-          }
-        }
+        "config": { "choices": {} }
       }
     },
     "SEO & Metadata": {

@@ -1,6 +1,7 @@
 import * as prismic from '@prismicio/client'
 import * as prismicNext from '@prismicio/next'
 import config from './slicemachine.config.json'
+import { env } from '@/env'
 
 /**
  * The project's Prismic repository name.
@@ -16,12 +17,8 @@ export const repositoryName = config.repositoryName
 // TODO: Update the routes array to match your project's route structure.
 const routes: prismic.ClientConfig['routes'] = [
   {
-    type: 'homepage',
-    path: '/',
-  },
-  {
-    type: 'page',
-    path: '/:uid',
+    type: 'post',
+    path: '/app/posts',
   },
 ]
 
@@ -34,6 +31,12 @@ const routes: prismic.ClientConfig['routes'] = [
 export const createClient = (config: prismicNext.CreateClientConfig = {}) => {
   const client = prismic.createClient(repositoryName, {
     routes,
+    fetchOptions:
+      env.NODE_ENV === 'production'
+        ? { next: { tags: ['prismic'] }, cache: 'force-cache' }
+        : { next: { revalidate: 5 } },
+    accessToken: env.PRISMIC_ACCESS_TOKEN,
+    ref: env.PRISMIC_REF,
     ...config,
   })
 
