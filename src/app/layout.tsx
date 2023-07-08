@@ -2,6 +2,8 @@ import { Roboto_Flex } from 'next/font/google'
 import { Header } from '@/components/Header'
 import NextAuthProvider from './providers'
 import './globals.scss'
+import { PrismicPreview } from '@prismicio/next'
+import { repositoryName } from '../../prismicio'
 
 const roboto = Roboto_Flex({
   display: 'swap',
@@ -23,7 +25,11 @@ export default function RootLayout({
       <body className={roboto.className}>
         <NextAuthProvider>
           <Header />
-          <section>{children}</section>
+          <section>
+            {children}
+            <PrismicPreview repositoryName={repositoryName}/>
+          </section>
+
         </NextAuthProvider>
       </body>
     </html>

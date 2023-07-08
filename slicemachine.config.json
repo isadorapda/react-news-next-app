@@ -1,0 +1,7 @@
+{
+  "repositoryName": "reactlatestnews",
+  "adapter": "@slicemachine/adapter-next",
+  "libraries": ["./slices"],
+  "apiEndpoint":"https://reactlatestnews.cdn.prismic.io/api/v2",
+  "localSliceSimulatorURL":"http://localhost:3000/slice-simulator"
+}
