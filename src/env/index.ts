@@ -13,6 +13,8 @@ export const envSchema = z.object({
     STRIPE_WEBHOOK_SECRET:z.string(),
     NEXT_PUBLIC_STRIPE_PUBLIC_KEY:z.string(),
     NEXTAUTH_SECRET:z.string(),
+    PRISMIC_ACCESS_TOKEN:z.string(),
+    PRISMIC_REF:z.string(),
 
 })
 
