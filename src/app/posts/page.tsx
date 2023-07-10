@@ -1,6 +1,7 @@
 import { createClient } from '../../../prismicio'
 import * as prismicH from '@prismicio/helpers'
 import styles from './styles.module.scss'
+import Link from 'next/link'
 
 export default async function Posts() {
   const data = await getData()
@@ -9,11 +10,11 @@ export default async function Posts() {
     <main className={styles.container}>
       <div className={styles.posts}>
         {data.props.posts.map((post) => (
-          <a key={post.slug} href="">
+          <Link key={post.slug} href={`/posts/${post.slug}`}>
             <time>{post.updatedAt}</time>
             <strong>{post.title}</strong>
             <p>{post.excerpt}</p>
-          </a>
+          </Link>
         ))}
       </div>
     </main>
@@ -31,7 +32,7 @@ export async function getData() {
     return {
       slug: post.uid,
       title: prismicH.asText(post.data.title),
-      excerpt: prismicH.asText(post.data.content),
+      excerpt: post.data.content[0].text,
       updatedAt: new Date(post.last_publication_date).toLocaleDateString(
         'en-GB',
         {
