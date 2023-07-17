@@ -2,6 +2,9 @@ import * as prismicH from '@prismicio/helpers'
 import { PrismicRichText } from '@prismicio/react'
 import { createClient } from '../../../../prismicio'
 import styles from './post.module.scss'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
+import { authOptions } from '@/app/lib/auth'
 
 export default async function Post({
   params: { slug },
@@ -22,8 +25,13 @@ export default async function Post({
 }
 
 export async function getData(slug: string) {
+  const session = await getServerSession(authOptions)
   const client = createClient()
   const response = await client.getByUID('post', slug, {})
+
+  if (!session?.activeSubscription) {
+    redirect('/')
+  }
 
   const post = {
     slug,

@@ -1,5 +1,5 @@
 {
-  "repositoryName": "reactlatestnews",
+  "repositoryName": "reactLatestNews",
   "adapter": "@slicemachine/adapter-next",
   "libraries": ["./slices"],
   "apiEndpoint":"https://reactlatestnews.cdn.prismic.io/api/v2",
