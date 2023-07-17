@@ -1,11 +1,11 @@
 import { query as q } from 'faunadb'
-import { fauna } from '@/app/services/fauna'
-import { stripe } from '@/lib/stripe'
+import { stripe } from '@/app/lib/stripe'
+import { fauna } from '@/app/lib/fauna'
 
 export async function saveSubscription(
   subscriptionId: string,
   customerId: string,
-  createAction = false
+  createAction: boolean
 ) {
   const userRef = await fauna.query(
     q.Select(
@@ -13,7 +13,6 @@ export async function saveSubscription(
       q.Get(q.Match(q.Index('user_by_stripe_customer_id'), customerId))
     )
   )
-
   const subscription = await stripe.subscriptions.retrieve(subscriptionId)
 
   const subscriptionData = {
