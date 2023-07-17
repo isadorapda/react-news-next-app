@@ -1,5 +1,5 @@
 import { env } from '@/env'
-import { stripe } from '@/lib/stripe'
+import { stripe } from '@/app/lib/stripe'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
@@ -13,7 +13,7 @@ const relevantEvents = new Set([
 
 export async function POST(request: Request, response: NextResponse) {
   const body = await request.text()
-  const signature = headers().get('Stripe-Signature') as string
+  const signature = headers().get('stripe-signature') as string
 
   let event: Stripe.Event
 
@@ -28,14 +28,13 @@ export async function POST(request: Request, response: NextResponse) {
   }
   const { type } = event
 
-  const session = event.data.object as Stripe.Checkout.Session
-  const subscription = event.data.object as Stripe.Subscription
-
   if (relevantEvents.has(type)) {
     try {
       switch (type) {
         case 'customer.subscription.updated':
         case 'customer.subscription.deleted':
+          const subscription = event.data.object as Stripe.Subscription
+
           await saveSubscription(
             subscription.id,
             subscription.customer as string,
@@ -44,6 +43,8 @@ export async function POST(request: Request, response: NextResponse) {
           break
 
         case 'checkout.session.completed':
+          const session = event.data.object as Stripe.Checkout.Session
+
           await saveSubscription(
             session.subscription as string,
             session.customer as string,

@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import styles from './page.module.scss'
 import { SubscribeButton } from '@/components/SubscribeButton'
-import { stripe } from '../lib/stripe'
+import { stripe } from './lib/stripe'
 
 export default async function Home() {
-  const data = await getData()
+  const {props} = await getData()
   return (
     <main className={styles.main}>
       <section className={styles.intro}>
@@ -14,9 +14,9 @@ export default async function Home() {
         </h1>
         <p>
           Get access to all publications <br />
-          <span>for {data.props.product.amount}/ month</span>
+          <span>for {props.product.amount}/ month</span>
         </p>
-        <SubscribeButton priceId={data.props.product.priceId} />
+        <SubscribeButton priceId={props.product.priceId} />
       </section>
       <Image
         src="/assets/avatar.svg"
@@ -29,7 +29,7 @@ export default async function Home() {
 }
 
 export const getData = async () => {
-  const price = await stripe.prices.retrieve('price_1NKjpOBYDIIN8e3FCUhFAYY4', {
+  const price = await stripe.prices.retrieve('price_1NUpq6AvhBUcYKX73chRxcvv', {
     expand: ['product'],
   })
   if (!price.unit_amount) {

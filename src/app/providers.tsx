@@ -7,6 +7,8 @@ interface AuthProps {
   children: React.ReactNode
 }
 
-export default async function NextAuthProvider({ children }: AuthProps) {
-  return <SessionProvider>{children}</SessionProvider>
+export  function NextAuthProvider({ children }: AuthProps) {
+  return (
+      <SessionProvider>{children}</SessionProvider>
+  )
 }

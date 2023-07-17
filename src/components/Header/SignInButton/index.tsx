@@ -7,7 +7,6 @@ import styles from './styles.module.scss'
 
 export function SingInButton() {
   const { data: session } = useSession()
-  console.log('sess', session)
   return session ? (
     <button
       type="button"
