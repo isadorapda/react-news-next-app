@@ -24,7 +24,7 @@ export default async function Posts() {
 export async function getData() {
   const client = createClient()
   const response = await client.getAllByType('post', {
-    fetch: ['post.title', 'post.content'],
+    // fetch: ['post.title', 'post.content'],
     pageSize: 100,
   })
 

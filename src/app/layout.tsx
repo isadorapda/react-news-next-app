@@ -1,6 +1,6 @@
 import { Roboto_Flex } from 'next/font/google'
 import { Header } from '@/components/Header'
-import NextAuthProvider from './providers'
+import {NextAuthProvider} from './providers'
 import './globals.scss'
 import { PrismicPreview } from '@prismicio/next'
 import { repositoryName } from '../../prismicio'
