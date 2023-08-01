@@ -1,27 +1,39 @@
 import * as prismicH from '@prismicio/helpers'
-import { PrismicRichText } from '@prismicio/react'
-import { createClient } from '../../../../prismicio'
-import styles from '../post.module.scss'
+import styles from '../../post.module.scss'
+import { createClient } from '../../../../../prismicio'
+import { Markup } from 'interweave'
+import { polyfill } from 'interweave-ssr'
+import Link from 'next/link'
+import { authOptions } from '@/app/lib/auth'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
-import { authOptions } from '@/app/lib/auth'
 
-export default async function Post({
+polyfill()
+
+export default async function PostPreview({
   params: { slug },
 }: {
   params: { slug: string }
 }) {
-  const session = await getServerSession(authOptions)
   const data = await getData(slug)
-  if (!session?.activeSubscription) {
-    return redirect(`/posts/preview/${slug}`)
+  const session = await getServerSession(authOptions)
+
+  if (session?.activeSubscription) {
+    return redirect(`/posts/${slug}`)
   }
+
   return (
     <main className={styles.container}>
       <article className={styles.post}>
         <h1>{data.props.post.title}</h1>
         <time>{data.props.post.updatedAt}</time>
-        <PrismicRichText field={data.props.post.content} />
+        <div className={styles.preview}>
+          <Markup content={data.props.post.content} tagName="div" />
+        </div>
+        <div className={styles.continueReading}>
+          To read the full content
+          <Link href={'/'}>subscribe now 🤗</Link>
+        </div>
       </article>
     </main>
   )
@@ -34,7 +46,7 @@ export async function getData(slug: string) {
   const post = {
     slug,
     title: prismicH.asText(response.data.title),
-    content: response.data.content,
+    content: prismicH.asHTML(response.data.content.splice(0, 5)),
     updatedAt: new Date(response.last_publication_date).toLocaleDateString(
       'en-GB',
       {
@@ -49,3 +61,4 @@ export async function getData(slug: string) {
     props: { post },
   }
 }
+export const revalidate = 60 * 30 // 30 min
