@@ -1,5 +1,5 @@
-import { exitPreview } from "@prismicio/next";
+import { exitPreview } from '@prismicio/next'
 
 export async function GET() {
-  return await exitPreview();
+  return exitPreview()
 }
