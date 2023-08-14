@@ -10,12 +10,13 @@ async function getPosts() {
   const response = await client.getAllByType('post', {
     pageSize: 100,
   })
+  console.log('VAVAVAVAVAVAV', response[0].data)
 
   const posts = response.map((post) => {
     return {
       slug: post.uid,
       title: prismicH.asText(post.data.title),
-      excerpt: post.data.content[0]?.text,
+      excerpt: post.data.summary,
       updatedAt: new Date(post.last_publication_date).toLocaleDateString(
         'en-GB',
         {
@@ -26,6 +27,7 @@ async function getPosts() {
       ),
     }
   })
+  //   console.log(posts)
 
   return {
     props: { posts },
