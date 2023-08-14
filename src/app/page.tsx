@@ -16,7 +16,7 @@ export default async function Home() {
           Get access to all publications <br />
           <span>for {props.product.amount}/ month</span>
         </p>
-        <SubscribeButton priceId={props.product.priceId} />
+        <SubscribeButton  />
       </section>
       <Image
         src="/assets/avatar.svg"
