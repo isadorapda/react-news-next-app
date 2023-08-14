@@ -1,14 +1,10 @@
 import * as prismicH from '@prismicio/helpers'
 import styles from '../../post.module.scss'
 import { createClient } from '../../../../../prismicio'
-import { Markup } from 'interweave'
-import { polyfill } from 'interweave-ssr'
 import Link from 'next/link'
 import { authOptions } from '@/app/lib/auth'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
-
-polyfill()
 
 export default async function PostPreview({
   params: { slug },
@@ -27,9 +23,10 @@ export default async function PostPreview({
       <article className={styles.post}>
         <h1>{data.props.post.title}</h1>
         <time>{data.props.post.updatedAt}</time>
-        <div className={styles.preview}>
-          <Markup content={data.props.post.content} tagName="div" />
-        </div>
+        <div
+          className={styles.preview}
+          dangerouslySetInnerHTML={{ __html: data.props.post.content }}
+        ></div>
         <div className={styles.continueReading}>
           To read the full content
           <Link href={'/'}>subscribe now 🤗</Link>
