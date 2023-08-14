@@ -31,7 +31,7 @@ export default async function Posts() {
   )
 }
 
-export async function getData() {
+async function getData() {
   const client = createClient()
   const response = await client.getAllByType('post', {
     pageSize: 100,
