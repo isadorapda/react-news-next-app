@@ -36,7 +36,7 @@ export default async function PostPreview({
   )
 }
 
-export async function getData(slug: string) {
+async function getData(slug: string) {
   const client = createClient()
   const response = await client.getByUID('post', slug, {})
 
