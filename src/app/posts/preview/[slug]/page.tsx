@@ -1,14 +1,11 @@
 import * as prismicH from '@prismicio/helpers'
 import styles from '../../post.module.scss'
 import { createClient } from '../../../../../prismicio'
-import { Markup } from 'interweave'
-import { polyfill } from 'interweave-ssr'
 import Link from 'next/link'
 import { authOptions } from '@/app/lib/auth'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
-
-polyfill()
+import { PrismicRichText } from '@prismicio/react'
 
 export default async function PostPreview({
   params: { slug },
@@ -27,9 +24,14 @@ export default async function PostPreview({
       <article className={styles.post}>
         <h1>{data.props.post.title}</h1>
         <time>{data.props.post.updatedAt}</time>
-        <div className={styles.preview}>
-          <Markup content={data.props.post.content} tagName="div" />
-        </div>
+        <div
+          className={styles.preview}
+          dangerouslySetInnerHTML={{ __html: data.props.post.content }}
+        ></div>
+        {/* <PrismicRichText
+          field={data.props.post.content}
+          components={components}
+        ></PrismicRichText> */}
         <div className={styles.continueReading}>
           To read the full content
           <Link href={'/'}>subscribe now 🤗</Link>
@@ -39,14 +41,14 @@ export default async function PostPreview({
   )
 }
 
-export async function getData(slug: string) {
+async function getData(slug: string) {
   const client = createClient()
   const response = await client.getByUID('post', slug, {})
-
+  const contt = response.data.content.splice(0, 5)
   const post = {
     slug,
     title: prismicH.asText(response.data.title),
-    content: prismicH.asHTML(response.data.content.splice(0, 5)),
+    content: prismicH.asHTML(response.data.content),
     updatedAt: new Date(response.last_publication_date).toLocaleDateString(
       'en-GB',
       {

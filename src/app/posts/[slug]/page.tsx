@@ -27,7 +27,7 @@ export default async function Post({
   )
 }
 
-export async function getData(slug: string) {
+async function getData(slug: string) {
   const client = createClient()
   const response = await client.getByUID('post', slug, {})
 

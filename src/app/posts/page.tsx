@@ -5,8 +5,37 @@ import Link from 'next/link'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../lib/auth'
 
+async function getPosts() {
+  const client = createClient()
+  const response = await client.getAllByType('post', {
+    pageSize: 100,
+  })
+  console.log('VAVAVAVAVAVAV', response[0].data)
+
+  const posts = response.map((post) => {
+    return {
+      slug: post.uid,
+      title: prismicH.asText(post.data.title),
+      excerpt: post.data.summary,
+      updatedAt: new Date(post.last_publication_date).toLocaleDateString(
+        'en-GB',
+        {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        }
+      ),
+    }
+  })
+  //   console.log(posts)
+
+  return {
+    props: { posts },
+  }
+}
+
 export default async function Posts() {
-  const data = await getData()
+  const data = await getPosts()
   const session = await getServerSession(authOptions)
 
   return (
@@ -29,31 +58,4 @@ export default async function Posts() {
       </div>
     </main>
   )
-}
-
-export async function getData() {
-  const client = createClient()
-  const response = await client.getAllByType('post', {
-    pageSize: 100,
-  })
-
-  const posts = response.map((post) => {
-    return {
-      slug: post.uid,
-      title: prismicH.asText(post.data.title),
-      excerpt: post.data.content[0]?.text,
-      updatedAt: new Date(post.last_publication_date).toLocaleDateString(
-        'en-GB',
-        {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric',
-        }
-      ),
-    }
-  })
-
-  return {
-    props: { posts },
-  }
 }
